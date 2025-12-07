@@ -1,5 +1,5 @@
 import { renderThumbnails } from './renderThumbnails.js';
-import { renderFullThumbnail} from './renderFullThumbnail.js';
+import { renderFullThumbnail } from './renderFullThumbnail.js';
 
 const openFullThumbnail = function(thumbnail, post) {
   thumbnail.addEventListener('click', (evt) => {

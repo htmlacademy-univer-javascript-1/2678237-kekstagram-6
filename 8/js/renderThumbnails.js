@@ -1,10 +1,11 @@
-const renderThumbnails = function(posts) {
+const renderThumbnails = function(posts, openFullThumbnail) {
   const pictures = document.querySelector('.pictures');
   const templatePictureFragment = document.querySelector('#picture').content;
   const templatePicture = templatePictureFragment.querySelector('.picture');
   const fragment = document.createDocumentFragment();
 
   for (let i = 0; i < posts.length; i++) {
+    const post = posts[i];
     const thumbnail = templatePicture.cloneNode(true);
     const img = thumbnail.querySelector('.picture__img');
     const info = thumbnail.querySelector('.picture__info');
@@ -16,6 +17,7 @@ const renderThumbnails = function(posts) {
     img.alt = posts[i].description;
     countComments.textContent = (posts[i].comments).length;
     pictureLikes.textContent = posts[i].likes;
+    openFullThumbnail(thumbnail, post);
 
     fragment.appendChild(thumbnail);
   }

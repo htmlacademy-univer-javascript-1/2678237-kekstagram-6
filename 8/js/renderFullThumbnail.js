@@ -1,15 +1,8 @@
-const bigPicture = document.querySelector('.big-picture');
-const bigPictureImg = bigPicture.querySelector('.big-picture__img');
-const likesCount = bigPicture.querySelector('.likes-count');
-const commentsCount = bigPicture.querySelector('.comments-count');
-const socialCaption = bigPicture.querySelector('.social__caption');
-const socialComments = bigPicture.querySelector('.social__comments');
-const socialCommentCount = bigPicture.querySelector('.social__comment-count');
-const commentsLoader = bigPicture.querySelector('.comments-loader');
-const closeButtonPicture = bigPicture.querySelector('.big-picture__cancel');
-const bodyDocument = document.querySelector('body');
+const viewComments = function (parentBlock, comments) {
+  const socialComments = parentBlock.querySelector('.social__comments');
+  const socialCommentCount = parentBlock.querySelector('.social__comment-count');
+  const commentsLoader = parentBlock.querySelector('.comments-loader');
 
-const viewComments = function (comments) {
   socialComments.innerHTML = '';
   socialCommentCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
@@ -35,6 +28,13 @@ const viewComments = function (comments) {
 };
 
 const renderFullThumbnail = function (post) {
+  const bigPicture = document.querySelector('.big-picture');
+  const bigPictureImg = bigPicture.querySelector('.big-picture__img');
+  const likesCount = bigPicture.querySelector('.likes-count');
+  const commentsCount = bigPicture.querySelector('.comments-count');
+  const socialCaption = bigPicture.querySelector('.social__caption');
+  const closeButtonPicture = bigPicture.querySelector('.big-picture__cancel');
+  const bodyDocument = document.querySelector('body');
   const comments = post.comments;
 
   bodyDocument.classList.add('modal-open');
@@ -46,7 +46,7 @@ const renderFullThumbnail = function (post) {
   commentsCount.textContent = comments.length;
   socialCaption.textContent = post.description;
 
-  viewComments(comments);
+  viewComments(bigPicture, comments);
 
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
@@ -61,4 +61,4 @@ const renderFullThumbnail = function (post) {
   });
 };
 
-export {renderFullThumbnail};
+export { renderFullThumbnail };
