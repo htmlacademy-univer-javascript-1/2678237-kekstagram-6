@@ -1,18 +1,19 @@
-const pictures = document.querySelector('.pictures');
-const templatePictureFragment = document.querySelector('#picture').content;
-const templatePicture = templatePictureFragment.querySelector('.picture');
-const fragment = document.createDocumentFragment();
-
 const renderThumbnails = function(posts) {
+  const pictures = document.querySelector('.pictures');
+  const templatePictureFragment = document.querySelector('#picture').content;
+  const templatePicture = templatePictureFragment.querySelector('.picture');
+  const fragment = document.createDocumentFragment();
+
   for (let i = 0; i < posts.length; i++) {
     const thumbnail = templatePicture.cloneNode(true);
-    const img = thumbnail.children[0];
-    const info = thumbnail.children[1];
-    const countComments = info.children[0];
-    const pictureLikes = info.children[1];
+    const img = thumbnail.querySelector('.picture__img');
+    const info = thumbnail.querySelector('.picture__info');
+    const countComments = info.querySelector('.picture__comments');
+    const pictureLikes = info.querySelector('.picture__likes');
 
     thumbnail.id = posts[i].id;
     img.src = posts[i].url;
+    img.alt = posts[i].description;
     countComments.textContent = (posts[i].comments).length;
     pictureLikes.textContent = posts[i].likes;
 
