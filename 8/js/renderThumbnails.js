@@ -1,4 +1,4 @@
-const renderThumbnails = function(posts, openFullThumbnail) {
+const renderThumbnails = function(posts, initFullThumbnail) {
   const pictures = document.querySelector('.pictures');
   const templatePictureFragment = document.querySelector('#picture').content;
   const templatePicture = templatePictureFragment.querySelector('.picture');
@@ -17,7 +17,7 @@ const renderThumbnails = function(posts, openFullThumbnail) {
     img.alt = posts[i].description;
     countComments.textContent = (posts[i].comments).length;
     pictureLikes.textContent = posts[i].likes;
-    openFullThumbnail(thumbnail, post);
+    initFullThumbnail(thumbnail, post);
 
     fragment.appendChild(thumbnail);
   }
