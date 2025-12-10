@@ -48,9 +48,11 @@ const renderFullThumbnail = function (post) {
     bigPicture.classList.add('hidden');
     bodyDocument.classList.remove('modal-open');
     document.removeEventListener('keydown', closeModal);
+    closeButtonPicture.removeEventListener('click', closeModal);
   };
 
   const onKeyDown = (evt) => {
+    evt.preventDefault();
     if (evt.key === 'Escape') {
       closeModal();
     }
