@@ -28,7 +28,7 @@ const viewComments = function (parentBlock, comments, countView) {
   socialComments.innerHTML = '';
   commentsCount.textContent = comments.length;
 
-  socialCommentCount.innerHTML = `${countView} из <span class="comments-count">${commentsCount.textContent}</span> комментариев`;
+  socialCommentCount.innerHTML = `${countView} из ${commentsCount.outerHTML} комментариев`;
 
   for (let i = 0; i < countView; i++) {
     const comment = comments[i];
