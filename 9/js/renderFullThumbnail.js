@@ -54,6 +54,33 @@ const renderFullThumbnail = function (post) {
   const maxComments = comments.length;
   let showCountComments = Math.min(MAX_VIEW_COMMENTS, maxComments);
 
+  const handleLoadMoreComments = () => {
+    showCountComments += MAX_VIEW_COMMENTS;
+
+    if (showCountComments >= maxComments) {
+      showCountComments = maxComments;
+      commentsLoaderButton.classList.add('hidden');
+    }
+
+    viewComments(bigPicture, comments, showCountComments);
+  };
+
+  const closeModal = () => {
+    bigPicture.classList.add('hidden');
+    bodyDocument.classList.remove('modal-open');
+    commentsLoaderButton.classList.remove('hidden');
+    document.removeEventListener('keydown', closeModal);
+    closeButtonPicture.removeEventListener('click', closeModal);
+    commentsLoaderButton.removeEventListener('click', handleLoadMoreComments);
+  };
+
+  const onKeyDown = (evt) => {
+    evt.preventDefault();
+    if (evt.key === 'Escape') {
+      closeModal();
+    }
+  };
+
   bodyDocument.classList.add('modal-open');
   bigPicture.classList.remove('hidden');
 
@@ -63,29 +90,15 @@ const renderFullThumbnail = function (post) {
   commentsCount.textContent = maxComments;
   socialCaption.textContent = post.description;
 
+  if (maxComments <= MAX_VIEW_COMMENTS) {
+    commentsLoaderButton.classList.add('hidden');
+  }
+
   viewComments(bigPicture, comments, showCountComments);
 
-  commentsLoaderButton.addEventListener('click', () => {
-    showCountComments += MAX_VIEW_COMMENTS;
-    if (showCountComments > maxComments) {
-      showCountComments = maxComments;
-      commentsLoaderButton.classList.add('hidden');
-    }
-    viewComments(bigPicture, comments, showCountComments);
-  });
-
-  document.addEventListener('keydown', (evt) => {
-    evt.preventDefault();
-    if (evt.key === 'Escape') {
-      bigPicture.classList.add('hidden');
-      bodyDocument.classList.remove('modal-open');
-    }
-  }, { once: true });
-
-  closeButtonPicture.addEventListener('click', () => {
-    bigPicture.classList.add('hidden');
-    bodyDocument.classList.remove('modal-open');
-  }, { once: true });
+  commentsLoaderButton.addEventListener('click', handleLoadMoreComments);
+  document.addEventListener('keydown', onKeyDown);
+  closeButtonPicture.addEventListener('click', closeModal);
 };
 
 export { renderFullThumbnail };
