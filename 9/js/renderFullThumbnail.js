@@ -24,11 +24,16 @@ const viewComments = function (parentBlock, comments, countView) {
   const socialComments = parentBlock.querySelector('.social__comments');
   const socialCommentCount = parentBlock.querySelector('.social__comment-count');
   const commentsCount = socialCommentCount.querySelector('.comments-count');
+  const maxComments = comments.length;
 
   socialComments.innerHTML = '';
-  commentsCount.textContent = comments.length;
+  commentsCount.textContent = maxComments;
 
-  socialCommentCount.innerHTML = `${countView} из ${commentsCount.outerHTML} комментариев`;
+  if (maxComments === 0) {
+    socialCommentCount.innerHTML = `${commentsCount.outerHTML} комментариев`;
+  } else {
+    socialCommentCount.innerHTML = `${countView} из ${commentsCount.outerHTML} комментариев`;
+  }
 
   for (let i = 0; i < countView; i++) {
     const comment = comments[i];
@@ -75,8 +80,8 @@ const renderFullThumbnail = function (post) {
   };
 
   const onKeyDown = (evt) => {
-    evt.preventDefault();
     if (evt.key === 'Escape') {
+      evt.preventDefault();
       closeModal();
     }
   };
