@@ -2,6 +2,7 @@ import validationForm from './validate.js';
 
 const formUploadImg = document.querySelector('#upload-select-image');
 const uploadFile = formUploadImg.querySelector('#upload-file');
+const submitButton = formUploadImg.querySelector('.img-upload__submit');
 const modalWindow = document.querySelector('.img-upload__overlay');
 const closeModalBtn = modalWindow.querySelector('.img-upload__cancel');
 const bodyDocument = document.querySelector('body');
@@ -67,8 +68,15 @@ const initForm = () => {
 
   uploadFile.addEventListener('change', changeInputImage);
   formUploadImg.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    pristine.validate();
+    const isValid = pristine.validate();
+
+    if (!isValid) {
+      evt.preventDefault();
+      return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'Отправляю...';
   });
 };
 
