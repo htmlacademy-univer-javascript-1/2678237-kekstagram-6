@@ -1,0 +1,22 @@
+.img-upload__field--invalid .text__hashtags,
+.img-upload__field--invalid .text__description {
+  margin-bottom: 0;
+  border: 2px solid red;
+}
+
+.img-upload__field-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__error {
+  color: red;
+}
+
+.text__hashtags + .form__error {
+  margin: 5px auto 15px 70px;
+}
+
+.text__description + .form__error {
+  margin: 10px auto 0 70px;
+}
