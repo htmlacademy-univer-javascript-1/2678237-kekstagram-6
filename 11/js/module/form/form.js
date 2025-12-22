@@ -119,12 +119,8 @@ const openModal = () => {
   });
 
   closeModalBtn.addEventListener('click', closeModal);
-  bodyDocument.addEventListener('keydown', (evt) => {
-    onKeyDown(evt);
-  });
-
+  bodyDocument.addEventListener('keydown', onKeyDown);
   effectsList.addEventListener('change', changeImageEffects);
-
   formUploadImg.addEventListener('submit', isValidSubmit);
 };
 
