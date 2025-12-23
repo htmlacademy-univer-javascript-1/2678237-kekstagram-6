@@ -74,8 +74,6 @@ const resetForm = () => {
   stepSlider.noUiSlider.updateOptions(DEFAULT_CONFIG_UISLIDER);
   imageEditor.setPreviewImage(DEFAULT_IMAGE_FORM);
   scaleController.destroy();
-  imageEditor = null;
-  scaleController = null;
 };
 
 const closeModal = () => {
