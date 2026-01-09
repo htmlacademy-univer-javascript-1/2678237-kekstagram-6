@@ -104,6 +104,10 @@ const submitForm = async (evt) => {
 
 const onKeyDown = (evt) => {
   if (evt.key === 'Escape') {
+    if (document.querySelector('.error') || document.querySelector('.success')) {
+      return;
+    }
+
     if (evt.target.closest('.text__hashtags') || evt.target.closest('.text__description')) {
       evt.target.blur();
       evt.stopPropagation();

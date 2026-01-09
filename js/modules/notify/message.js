@@ -82,7 +82,7 @@ const showAlertMessage = (message, type = 'info') => {
   const titleAlert = document.createElement('p');
 
   alertBlock.append(titleAlert);
-  alertBlock.classList.add('alert', `alert--${type}`);
+  alertBlock.classList.add('alert', `alert--${type}`, `data-${type}`);
   titleAlert.textContent = message;
 
   document.body.append(alertBlock);

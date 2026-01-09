@@ -23,17 +23,19 @@ const createComment = function (comment) {
 const viewComments = function (parentBlock, comments, countView) {
   const socialComments = parentBlock.querySelector('.social__comments');
   const socialCommentCount = parentBlock.querySelector('.social__comment-count');
-  const commentsCount = socialCommentCount.querySelector('.comments-count');
+
+  const showCountComments = document.createElement('span');
+  const totalCountComments = document.createElement('span');
+
   const maxComments = comments.length;
 
-  socialComments.innerHTML = '';
-  commentsCount.textContent = maxComments;
+  showCountComments.classList.add('social__comment-shown-count');
+  totalCountComments.classList.add('social__comment-total-count');
 
-  if (maxComments === 0) {
-    socialCommentCount.innerHTML = `${commentsCount.outerHTML} комментариев`;
-  } else {
-    socialCommentCount.innerHTML = `${countView} из ${commentsCount.outerHTML} комментариев`;
-  }
+  socialComments.innerHTML = '';
+  showCountComments.textContent = countView;
+  totalCountComments.textContent = maxComments;
+  socialCommentCount.innerHTML = `${showCountComments.outerHTML} из ${totalCountComments.outerHTML} комментариев`;
 
   for (let i = 0; i < countView; i++) {
     const comment = comments[i];
@@ -49,7 +51,6 @@ const renderFullThumbnail = function (post) {
   const bodyDocument = document.querySelector('body');
 
   const likesCount = bigPicture.querySelector('.likes-count');
-  const commentsCount = bigPicture.querySelector('.comments-count');
   const socialCaption = bigPicture.querySelector('.social__caption');
 
   const closeButtonPicture = bigPicture.querySelector('.big-picture__cancel');
@@ -92,7 +93,6 @@ const renderFullThumbnail = function (post) {
   bigPictureImg.src = post.url;
   bigPictureImg.alt = post.description;
   likesCount.textContent = post.likes;
-  commentsCount.textContent = maxComments;
   socialCaption.textContent = post.description;
 
   if (maxComments <= MAX_VIEW_COMMENTS) {
