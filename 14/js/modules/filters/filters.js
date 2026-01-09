@@ -3,12 +3,14 @@ import { renderGallery, clearGallery } from '../gallery/gallery.js';
 import { COUNT_RANDOM_POSTS, TYPE_FILTER } from '../data/constants.js';
 
 const getRandomPosts = (copy) => {
-  const result = new Set();
-  while (result.size < COUNT_RANDOM_POSTS) {
+  const result = [];
+  while (result.length < COUNT_RANDOM_POSTS) {
     const rndIndex = getRandom(0, copy.length - 1);
-    result.add(copy[rndIndex]);
+    if (!result.includes(copy[rndIndex])) {
+      result.push(copy[rndIndex]);
+    }
   }
-  return Array.from(result.values());
+  return result;
 };
 
 const usePostsFilters = (posts, typeFilter) => {
